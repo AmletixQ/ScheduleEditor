@@ -15,7 +15,7 @@ namespace ScheduleEditor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ScheduleForm());
+            Application.Run(new ScheduleForm("ФМКН"));
         }
     }
 }

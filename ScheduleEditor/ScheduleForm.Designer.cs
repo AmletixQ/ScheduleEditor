@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.FlowNavigation = new System.Windows.Forms.FlowLayoutPanel();
             this.CreateButton = new System.Windows.Forms.Button();
             this.BackButton = new System.Windows.Forms.Button();
-            this.ChapterLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -45,12 +44,13 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Панель навигации";
             // 
-            // flowLayoutPanel1
+            // FlowNavigation
             // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 27);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(188, 383);
-            this.flowLayoutPanel1.TabIndex = 1;
+            this.FlowNavigation.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.FlowNavigation.Location = new System.Drawing.Point(4, 27);
+            this.FlowNavigation.Name = "FlowNavigation";
+            this.FlowNavigation.Size = new System.Drawing.Size(124, 383);
+            this.FlowNavigation.TabIndex = 1;
             // 
             // CreateButton
             // 
@@ -69,26 +69,16 @@
             this.BackButton.TabIndex = 3;
             this.BackButton.Text = "Назад";
             this.BackButton.UseVisualStyleBackColor = true;
-            // 
-            // ChapterLabel
-            // 
-            this.ChapterLabel.AutoSize = true;
-            this.ChapterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ChapterLabel.Location = new System.Drawing.Point(430, 9);
-            this.ChapterLabel.Name = "ChapterLabel";
-            this.ChapterLabel.Size = new System.Drawing.Size(103, 20);
-            this.ChapterLabel.TabIndex = 4;
-            this.ChapterLabel.Text = "Факультет";
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
             // 
             // ScheduleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.ChapterLabel);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.CreateButton);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.FlowNavigation);
             this.Controls.Add(this.label1);
             this.Name = "ScheduleForm";
             this.Text = "Editor";
@@ -100,10 +90,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel FlowNavigation;
         private System.Windows.Forms.Button CreateButton;
         private System.Windows.Forms.Button BackButton;
-        private System.Windows.Forms.Label ChapterLabel;
     }
 }
 
