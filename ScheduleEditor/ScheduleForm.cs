@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace ScheduleEditor
 {
@@ -11,5 +11,12 @@ namespace ScheduleEditor
         {
             InitializeComponent();
         }
+
+        public ScheduleForm(string facultyName) : this()
+        {
+
+        }
+
+
     }
 }
