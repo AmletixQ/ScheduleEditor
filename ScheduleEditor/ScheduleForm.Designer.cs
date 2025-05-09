@@ -60,10 +60,11 @@
             this.CreateButton.TabIndex = 2;
             this.CreateButton.Text = "Добавить";
             this.CreateButton.UseVisualStyleBackColor = true;
+            this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
             // 
             // BackButton
             // 
-            this.BackButton.Location = new System.Drawing.Point(117, 425);
+            this.BackButton.Location = new System.Drawing.Point(85, 425);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(75, 23);
             this.BackButton.TabIndex = 3;

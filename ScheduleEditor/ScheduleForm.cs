@@ -32,13 +32,21 @@ namespace ScheduleEditor
             {
                 Control control;
 
-                if (file.Contains(".txt"))
+                if (file.Contains(".json"))
                 {
                     control = new LinkLabel()
                     {
-                        Text = file,
-                        BorderStyle = BorderStyle.FixedSingle,
-                        Padding = new Padding(0, 0, 0, 10)
+                        Text = Path.GetFileNameWithoutExtension(file),
+                        Font = new System.Drawing.Font("", 10),
+                        AutoSize = true,
+                        Margin = new Padding(0, 0, 0, 4)
+                    };
+
+                    control.Click += (object sender, EventArgs e) =>
+                    {
+                        if (BreadCrumbs.Contains(file)) return;
+
+                        BreadCrumbs.Add(file);
                     };
                 }
                 else
@@ -93,6 +101,22 @@ namespace ScheduleEditor
         {
             BreadCrumbs.RemoveAt(BreadCrumbs.Count - 1);
             UpdateNavigation();
+        }
+
+        private void CreateButton_Click(object sender, EventArgs e)
+        {
+            string path = BuildPath();
+            if (!path.Contains(".json")) return;
+
+            //Lesson lesson = new Lesson(
+            //    "Математический анализ",
+            //    "Кулаев Руслан Черменович",
+            //    "301",
+            //    new TimeSpan(9, 0, 0),
+            //    new TimeSpan(10, 30, 0),
+            //    TLesson.LECTURE,
+            //    TWeek.BOTH
+            //);
         }
     }
 }
