@@ -23,6 +23,7 @@ namespace ScheduleEditor
 
         private void UpdateNavigation()
         {
+
             BackButton.Enabled = BreadCrumbs.Count > 3;
 
             FlowNavigation.Controls.Clear();
@@ -36,15 +37,19 @@ namespace ScheduleEditor
                 {
                     control = new LinkLabel()
                     {
-                        Text = Path.GetFileNameWithoutExtension(file),
+                        Text = Path.GetFileName(file),
                         Font = new System.Drawing.Font("", 10),
                         AutoSize = true,
-                        Margin = new Padding(0, 0, 0, 4)
+                        Margin = new Padding(0, 0, 0, 4),
                     };
 
                     control.Click += (object sender, EventArgs e) =>
                     {
                         if (BreadCrumbs.Contains(file)) return;
+
+                        string current = e.ToString();
+                        if (BreadCrumbs.Contains(current)) return;
+                        if (BreadCrumbs[BreadCrumbs.Count - 1].Contains(".json")) return;
 
                         BreadCrumbs.Add(file);
                     };
@@ -65,6 +70,8 @@ namespace ScheduleEditor
 
                 FlowNavigation.Controls.Add(control);
             }
+
+            ScheduleDataGrid.Visible = BreadCrumbs[BreadCrumbs.Count - 1].Contains(".json");
         }
 
         private string BuildPath(int outDir = 0)
