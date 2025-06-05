@@ -9,20 +9,32 @@ namespace ScheduleEditor
     public partial class ScheduleForm : Form
     {
         private List<string> BreadCrumbs;
+            WeeklySchedule weeklySchedule = new WeeklySchedule();
 
         public ScheduleForm()
         {
             InitializeComponent();
+            ScheduleDataGrid.RowCount = 4;
+            ScheduleDataGrid.Rows[0].Cells[0].Value = "9:00";
+            ScheduleDataGrid.Rows[1].Cells[0].Value = "10:40";
+            ScheduleDataGrid.Rows[2].Cells[0].Value = "12:50";
+            ScheduleDataGrid.Rows[3].Cells[0].Value = "14:20";
         }
 
         public ScheduleForm(string facultyName) : this()
+
         {
             BreadCrumbs = new List<string>() { "database", "Факультеты", facultyName };
             UpdateNavigation();
+
+            weeklySchedule.AddLesson(
+                TDay.MONDAY, "Математический анализ", "301", "Кулаев", TLesson.LECTURE, TWeek.ODD
+            );
         }
 
         private void UpdateNavigation()
         {
+
             BackButton.Enabled = BreadCrumbs.Count > 3;
 
             FlowNavigation.Controls.Clear();
@@ -39,14 +51,21 @@ namespace ScheduleEditor
                         Text = Path.GetFileNameWithoutExtension(file),
                         Font = new System.Drawing.Font("", 10),
                         AutoSize = true,
-                        Margin = new Padding(0, 0, 0, 4)
+                        Margin = new Padding(0, 0, 0, 4),
                     };
 
                     control.Click += (object sender, EventArgs e) =>
                     {
                         if (BreadCrumbs.Contains(file)) return;
 
+                        string current = e.ToString();
+                        if (BreadCrumbs.Contains(current)) return;
+                        if (BreadCrumbs[BreadCrumbs.Count - 1].Contains(".json")) return;
+                        ScheduleDataGrid.Visible = true;
+
                         BreadCrumbs.Add(file);
+                        weeklySchedule.WriteToJson(BuildPath());
+
                     };
                 }
                 else
@@ -65,6 +84,8 @@ namespace ScheduleEditor
 
                 FlowNavigation.Controls.Add(control);
             }
+
+            ScheduleDataGrid.Visible = BreadCrumbs[BreadCrumbs.Count - 1].Contains(".json");
         }
 
         private string BuildPath(int outDir = 0)

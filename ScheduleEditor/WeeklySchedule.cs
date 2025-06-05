@@ -6,6 +6,7 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
 using System.IO;
+using System.Windows.Forms;
 
 namespace ScheduleEditor
 {
@@ -22,7 +23,22 @@ namespace ScheduleEditor
 
     internal class WeeklySchedule
     {
-        public Dictionary<TDay, List<Lesson>> Schedule = new Dictionary<TDay, List<Lesson>>();
+        public Dictionary<TDay, List<Lesson>> Schedule = new Dictionary<TDay, List<Lesson>>()
+        {
+            { TDay.MONDAY, new List<Lesson>() },
+            { TDay.TUESDAY, new List<Lesson>() },
+            { TDay.WEDNESDAY, new List<Lesson>() },
+            { TDay.THURSDAY, new List<Lesson>() },
+            { TDay.FRIDAY, new List<Lesson>() },
+            { TDay.SATURDAY, new List<Lesson>() },
+        };
+
+        public void AddLesson(TDay day, string name, string classroom, string teacher, TLesson type, TWeek week)
+        {
+            Schedule[day].Add(
+                new Lesson(name, teacher, classroom, type, week)
+            );
+        }
 
         public void WriteToJson(string filename)
         {
@@ -32,8 +48,9 @@ namespace ScheduleEditor
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
             };
 
-            string jsonString = JsonSerializer.Serialize(this, options);
+            string jsonString = JsonSerializer.Serialize(Schedule, options);
             File.WriteAllText(filename, jsonString);
+            MessageBox.Show("WRITED " + filename);
         }
     }
 }
