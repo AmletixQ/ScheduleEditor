@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
+using System.Linq;
 
 namespace ScheduleEditor
 {
     public partial class AuthForm : Form
     {
-        private const string UserFilePath = "user.txt";
-
         public AuthForm()
         {
             InitializeComponent();
-            LoadUsers();
         }
 
         private void buttonEnter_Click(object sender, EventArgs e)
@@ -20,23 +18,26 @@ namespace ScheduleEditor
             string login = textBoxLogin.Text;
             string password = textBoxPass.Text;
 
-            if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Пожалуйста введите логин и пароль ", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Пожалуйста введите логин и пароль", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            else MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return;
+            List<string[]> user_datas = File.ReadAllLines("./database/users.txt")
+                                        .Select(user_data => user_data.Split('|'))
+                                        .ToList();
+
+            string[] result_data = user_datas.Where(user_data => user_data[0] == login && user_data[1] == password).First();
+            EnterToSchedule(result_data[2]);
         }
 
-        private void LoadUsers()
+        private void EnterToSchedule(string faculty)
         {
-            if (!File.Exists(UserFilePath))
-            {
-                UserManager.AddUser("admin", "admin123");
-            }
-
+            this.Hide();
+            ScheduleForm scheduleForm = new ScheduleForm(faculty);
+            scheduleForm.ShowDialog();
+            this.Close();
         }
 
     }
