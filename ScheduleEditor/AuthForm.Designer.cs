@@ -37,9 +37,9 @@
             // 
             // buttonEnter
             // 
-            this.buttonEnter.Location = new System.Drawing.Point(27, 244);
+            this.buttonEnter.Location = new System.Drawing.Point(115, 149);
             this.buttonEnter.Name = "buttonEnter";
-            this.buttonEnter.Size = new System.Drawing.Size(75, 23);
+            this.buttonEnter.Size = new System.Drawing.Size(105, 37);
             this.buttonEnter.TabIndex = 0;
             this.buttonEnter.Text = "Ввод";
             this.buttonEnter.UseVisualStyleBackColor = true;
@@ -48,7 +48,7 @@
             // labelLogin
             // 
             this.labelLogin.AutoSize = true;
-            this.labelLogin.Location = new System.Drawing.Point(30, 30);
+            this.labelLogin.Location = new System.Drawing.Point(143, 9);
             this.labelLogin.Name = "labelLogin";
             this.labelLogin.Size = new System.Drawing.Size(46, 16);
             this.labelLogin.TabIndex = 1;
@@ -57,7 +57,7 @@
             // labelPass
             // 
             this.labelPass.AutoSize = true;
-            this.labelPass.Location = new System.Drawing.Point(30, 128);
+            this.labelPass.Location = new System.Drawing.Point(137, 77);
             this.labelPass.Name = "labelPass";
             this.labelPass.Size = new System.Drawing.Size(56, 16);
             this.labelPass.TabIndex = 2;
@@ -65,14 +65,14 @@
             // 
             // textBoxLogin
             // 
-            this.textBoxLogin.Location = new System.Drawing.Point(27, 63);
+            this.textBoxLogin.Location = new System.Drawing.Point(115, 28);
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(100, 22);
             this.textBoxLogin.TabIndex = 3;
             // 
             // textBoxPass
             // 
-            this.textBoxPass.Location = new System.Drawing.Point(27, 158);
+            this.textBoxPass.Location = new System.Drawing.Point(115, 96);
             this.textBoxPass.Name = "textBoxPass";
             this.textBoxPass.Size = new System.Drawing.Size(100, 22);
             this.textBoxPass.TabIndex = 4;
@@ -81,7 +81,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(282, 355);
+            this.ClientSize = new System.Drawing.Size(337, 270);
             this.Controls.Add(this.textBoxPass);
             this.Controls.Add(this.textBoxLogin);
             this.Controls.Add(this.labelPass);

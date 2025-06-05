@@ -22,16 +22,12 @@ namespace ScheduleEditor
         public string Teacher { get; set; }
         public string Classroom { get; set; }
         public string LessonType { get; set; }
-        public TimeSpan StartTime { get; set; }
-        public TimeSpan EndTime { get; set; }
         public TWeek WeekType { get; set; } = TWeek.BOTH;
 
         public Lesson(
             string name,
             string teacher,
             string classroom,
-            TimeSpan startTime,
-            TimeSpan endTime,
             TLesson lessonType,
             TWeek week
         )
@@ -39,8 +35,6 @@ namespace ScheduleEditor
             Name = name;
             Teacher = teacher;
             Classroom = classroom;
-            StartTime = startTime;
-            EndTime = endTime;
             WeekType = week;
 
             switch (lessonType)

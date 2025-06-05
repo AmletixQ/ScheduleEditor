@@ -14,8 +14,8 @@ namespace ScheduleEditor
         static void Main()
         {
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AuthForm());
+            dApplication.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new ScheduleForm("ФМКН"));
         }
     }
 }

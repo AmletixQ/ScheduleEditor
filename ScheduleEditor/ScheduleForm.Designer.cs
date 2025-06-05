@@ -96,11 +96,11 @@
             this.Thursday,
             this.Friday,
             this.Saturday});
-            this.ScheduleDataGrid.Location = new System.Drawing.Point(225, 33);
+            this.ScheduleDataGrid.Location = new System.Drawing.Point(220, 32);
             this.ScheduleDataGrid.Name = "ScheduleDataGrid";
             this.ScheduleDataGrid.RowHeadersWidth = 49;
             this.ScheduleDataGrid.RowTemplate.Height = 24;
-            this.ScheduleDataGrid.Size = new System.Drawing.Size(879, 471);
+            this.ScheduleDataGrid.Size = new System.Drawing.Size(838, 471);
             this.ScheduleDataGrid.TabIndex = 4;
             this.ScheduleDataGrid.Visible = false;
             // 
