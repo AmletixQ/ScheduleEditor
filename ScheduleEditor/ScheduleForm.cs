@@ -64,7 +64,7 @@ namespace ScheduleEditor
                         ScheduleDataGrid.Visible = true;
 
                         BreadCrumbs.Add(file);
-                        weeklySchedule.WriteToJson(BuildPath());
+                        weeklySchedule.WriteToJson("./database/test.json");
 
                     };
                 }

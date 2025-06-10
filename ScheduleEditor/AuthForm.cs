@@ -23,13 +23,29 @@ namespace ScheduleEditor
                 MessageBox.Show("Пожалуйста введите логин и пароль", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            List<string[]> user_datas = File.ReadAllLines("./database/users.txt")
+            try
+            {
+                List<string[]> user_datas = File.ReadAllLines("./database/users.txt")
                                         .Select(user_data => user_data.Split('|'))
                                         .ToList();
 
-            string[] result_data = user_datas.Where(user_data => user_data[0] == login && user_data[1] == password).First();
-            EnterToSchedule(result_data[2]);
+                var result_data = user_datas.FirstOrDefault(user_data => user_data[0] == login && user_data[1] == password);
+
+                if (result_data != null)
+                {
+                    EnterToSchedule(result_data[2]);
+
+                }
+                else
+                {
+                    MessageBox.Show("Неверный логи или пароль", "Ошибка аавторизации", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void EnterToSchedule(string faculty)

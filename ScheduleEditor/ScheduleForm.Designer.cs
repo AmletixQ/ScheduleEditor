@@ -98,6 +98,7 @@
             this.Saturday});
             this.ScheduleDataGrid.Location = new System.Drawing.Point(220, 32);
             this.ScheduleDataGrid.Name = "ScheduleDataGrid";
+            this.ScheduleDataGrid.ReadOnly = true;
             this.ScheduleDataGrid.RowHeadersWidth = 49;
             this.ScheduleDataGrid.RowTemplate.Height = 24;
             this.ScheduleDataGrid.Size = new System.Drawing.Size(838, 471);
@@ -110,6 +111,7 @@
             this.TimeColumn.HeaderText = "Time";
             this.TimeColumn.MinimumWidth = 6;
             this.TimeColumn.Name = "TimeColumn";
+            this.TimeColumn.ReadOnly = true;
             this.TimeColumn.Width = 67;
             // 
             // Monday
@@ -117,6 +119,7 @@
             this.Monday.HeaderText = "Понедельник";
             this.Monday.MinimumWidth = 6;
             this.Monday.Name = "Monday";
+            this.Monday.ReadOnly = true;
             this.Monday.Width = 120;
             // 
             // Tuesday
@@ -124,6 +127,7 @@
             this.Tuesday.HeaderText = "Вторник";
             this.Tuesday.MinimumWidth = 6;
             this.Tuesday.Name = "Tuesday";
+            this.Tuesday.ReadOnly = true;
             this.Tuesday.Width = 120;
             // 
             // Wednesday
@@ -131,6 +135,7 @@
             this.Wednesday.HeaderText = "Среда";
             this.Wednesday.MinimumWidth = 6;
             this.Wednesday.Name = "Wednesday";
+            this.Wednesday.ReadOnly = true;
             this.Wednesday.Width = 120;
             // 
             // Thursday
@@ -138,6 +143,7 @@
             this.Thursday.HeaderText = "Четверг";
             this.Thursday.MinimumWidth = 6;
             this.Thursday.Name = "Thursday";
+            this.Thursday.ReadOnly = true;
             this.Thursday.Width = 120;
             // 
             // Friday
@@ -145,6 +151,7 @@
             this.Friday.HeaderText = "Пятница";
             this.Friday.MinimumWidth = 6;
             this.Friday.Name = "Friday";
+            this.Friday.ReadOnly = true;
             this.Friday.Width = 120;
             // 
             // Saturday
@@ -152,6 +159,7 @@
             this.Saturday.HeaderText = "Суббота";
             this.Saturday.MinimumWidth = 6;
             this.Saturday.Name = "Saturday";
+            this.Saturday.ReadOnly = true;
             this.Saturday.Width = 120;
             // 
             // ScheduleForm
