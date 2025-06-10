@@ -40,7 +40,6 @@
             this.Thursday = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Friday = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Saturday = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RemoveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ScheduleDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -119,6 +118,7 @@
             this.Monday.HeaderText = "Понедельник";
             this.Monday.MinimumWidth = 6;
             this.Monday.Name = "Monday";
+            this.Monday.ReadOnly = true;
             this.Monday.Width = 120;
             // 
             // Tuesday
@@ -126,6 +126,7 @@
             this.Tuesday.HeaderText = "Вторник";
             this.Tuesday.MinimumWidth = 6;
             this.Tuesday.Name = "Tuesday";
+            this.Tuesday.ReadOnly = true;
             this.Tuesday.Width = 120;
             // 
             // Wednesday
@@ -133,6 +134,7 @@
             this.Wednesday.HeaderText = "Среда";
             this.Wednesday.MinimumWidth = 6;
             this.Wednesday.Name = "Wednesday";
+            this.Wednesday.ReadOnly = true;
             this.Wednesday.Width = 120;
             // 
             // Thursday
@@ -140,6 +142,7 @@
             this.Thursday.HeaderText = "Четверг";
             this.Thursday.MinimumWidth = 6;
             this.Thursday.Name = "Thursday";
+            this.Thursday.ReadOnly = true;
             this.Thursday.Width = 120;
             // 
             // Friday
@@ -147,6 +150,7 @@
             this.Friday.HeaderText = "Пятница";
             this.Friday.MinimumWidth = 6;
             this.Friday.Name = "Friday";
+            this.Friday.ReadOnly = true;
             this.Friday.Width = 120;
             // 
             // Saturday
@@ -154,6 +158,7 @@
             this.Saturday.HeaderText = "Суббота";
             this.Saturday.MinimumWidth = 6;
             this.Saturday.Name = "Saturday";
+            this.Saturday.ReadOnly = true;
             this.Saturday.Width = 120;
             // 
             // ScheduleForm
@@ -161,7 +166,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(953, 457);
-            this.Controls.Add(this.RemoveButton);
             this.Controls.Add(this.ScheduleDataGrid);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.CreateButton);
@@ -189,7 +193,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Thursday;
         private System.Windows.Forms.DataGridViewTextBoxColumn Friday;
         private System.Windows.Forms.DataGridViewTextBoxColumn Saturday;
-        private System.Windows.Forms.Button RemoveButton;
     }
 }
 

@@ -10,7 +10,7 @@ namespace ScheduleEditor
     public partial class ScheduleForm : Form
     {
         private List<string> BreadCrumbs;
-            WeeklySchedule weeklySchedule = new WeeklySchedule();
+        WeeklySchedule weeklySchedule = new WeeklySchedule();
 
         public ScheduleForm()
         {
@@ -57,19 +57,16 @@ namespace ScheduleEditor
 
                     control.DoubleClick += (object sender, EventArgs e) =>
                     {
-                        if (BreadCrumbs.Contains(file))
-                        {
-                            BreadCrumbs[BreadCrumbs.Count - 1] = file;
-                        }
+                        if (BreadCrumbs.Contains(file)) return;
 
                         string current = e.ToString();
                         if (BreadCrumbs.Contains(current)) return;
-                        if (BreadCrumbs[BreadCrumbs.Count - 1].Contains(".json")) return;
-                        ScheduleDataGrid.Visible = true;
+
+                        if (BreadCrumbs[BreadCrumbs.Count - 1].Contains(".json"))
+                            BreadCrumbs[BreadCrumbs.Count - 1] = file;
 
                         BreadCrumbs.Add(file);
-                        weeklySchedule.WriteToJson(BuildPath());
-
+                        ScheduleDataGrid.Visible = true;
                     };
                 }
                 else
@@ -139,9 +136,26 @@ namespace ScheduleEditor
 
         private void ScheduleDataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0 || e.ColumnIndex < 1) return;
+            int rowIndex = e.RowIndex;
+            int columnIndex = e.ColumnIndex;
+            if (rowIndex < 0 || columnIndex < 1) return;
 
-            
+            string lessonData = ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value?.ToString() ?? "";
+            if (string.IsNullOrEmpty(lessonData))
+            {
+                EditLessonForm editLessonForm = new EditLessonForm();
+                editLessonForm.ShowDialog();
+
+                ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value = editLessonForm.GetViewLessonString();
+            } else
+            {
+                Lesson lesson = Lesson.LoadFromString(lessonData);
+                if (lesson == null) return;
+                EditLessonForm editLessonForm = new EditLessonForm(lesson);
+                editLessonForm.ShowDialog();
+                ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value = editLessonForm.GetViewLessonString();
+            }
+
         }
     }
 }
