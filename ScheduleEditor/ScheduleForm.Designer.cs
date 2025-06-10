@@ -40,6 +40,7 @@
             this.Thursday = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Friday = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Saturday = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RemoveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ScheduleDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,27 +49,24 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(235, 29);
+            this.label1.Size = new System.Drawing.Size(192, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "Панель навигации";
             // 
             // FlowNavigation
             // 
             this.FlowNavigation.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.FlowNavigation.Location = new System.Drawing.Point(5, 33);
-            this.FlowNavigation.Margin = new System.Windows.Forms.Padding(4);
+            this.FlowNavigation.Location = new System.Drawing.Point(4, 27);
             this.FlowNavigation.Name = "FlowNavigation";
-            this.FlowNavigation.Size = new System.Drawing.Size(165, 471);
+            this.FlowNavigation.Size = new System.Drawing.Size(124, 383);
             this.FlowNavigation.TabIndex = 1;
             // 
             // CreateButton
             // 
-            this.CreateButton.Location = new System.Drawing.Point(5, 523);
-            this.CreateButton.Margin = new System.Windows.Forms.Padding(4);
+            this.CreateButton.Location = new System.Drawing.Point(4, 425);
             this.CreateButton.Name = "CreateButton";
-            this.CreateButton.Size = new System.Drawing.Size(100, 28);
+            this.CreateButton.Size = new System.Drawing.Size(75, 23);
             this.CreateButton.TabIndex = 2;
             this.CreateButton.Text = "Добавить";
             this.CreateButton.UseVisualStyleBackColor = true;
@@ -76,10 +74,9 @@
             // 
             // BackButton
             // 
-            this.BackButton.Location = new System.Drawing.Point(113, 523);
-            this.BackButton.Margin = new System.Windows.Forms.Padding(4);
+            this.BackButton.Location = new System.Drawing.Point(85, 425);
             this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(100, 28);
+            this.BackButton.Size = new System.Drawing.Size(75, 23);
             this.BackButton.TabIndex = 3;
             this.BackButton.Text = "Назад";
             this.BackButton.UseVisualStyleBackColor = true;
@@ -96,13 +93,17 @@
             this.Thursday,
             this.Friday,
             this.Saturday});
-            this.ScheduleDataGrid.Location = new System.Drawing.Point(220, 32);
+            this.ScheduleDataGrid.Location = new System.Drawing.Point(163, 27);
+            this.ScheduleDataGrid.Margin = new System.Windows.Forms.Padding(2);
             this.ScheduleDataGrid.Name = "ScheduleDataGrid";
-            this.ScheduleDataGrid.RowHeadersWidth = 49;
+            this.ScheduleDataGrid.ReadOnly = true;
+            this.ScheduleDataGrid.RowHeadersVisible = false;
+            this.ScheduleDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.ScheduleDataGrid.RowTemplate.Height = 24;
-            this.ScheduleDataGrid.Size = new System.Drawing.Size(838, 471);
+            this.ScheduleDataGrid.Size = new System.Drawing.Size(779, 383);
             this.ScheduleDataGrid.TabIndex = 4;
             this.ScheduleDataGrid.Visible = false;
+            this.ScheduleDataGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ScheduleDataGrid_CellDoubleClick);
             // 
             // TimeColumn
             // 
@@ -110,7 +111,8 @@
             this.TimeColumn.HeaderText = "Time";
             this.TimeColumn.MinimumWidth = 6;
             this.TimeColumn.Name = "TimeColumn";
-            this.TimeColumn.Width = 67;
+            this.TimeColumn.ReadOnly = true;
+            this.TimeColumn.Width = 55;
             // 
             // Monday
             // 
@@ -156,15 +158,15 @@
             // 
             // ScheduleForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1201, 569);
+            this.ClientSize = new System.Drawing.Size(953, 457);
+            this.Controls.Add(this.RemoveButton);
             this.Controls.Add(this.ScheduleDataGrid);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.CreateButton);
             this.Controls.Add(this.FlowNavigation);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ScheduleForm";
             this.Text = "Editor";
             ((System.ComponentModel.ISupportInitialize)(this.ScheduleDataGrid)).EndInit();
@@ -187,6 +189,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Thursday;
         private System.Windows.Forms.DataGridViewTextBoxColumn Friday;
         private System.Windows.Forms.DataGridViewTextBoxColumn Saturday;
+        private System.Windows.Forms.Button RemoveButton;
     }
 }
 

@@ -40,6 +40,8 @@ namespace ScheduleEditor
             );
         }
 
+        public void RemoveLesson(TDay day, Lesson lesson) => Schedule[day].Remove(lesson);
+
         public void WriteToJson(string filename)
         {
             var options = new JsonSerializerOptions()
