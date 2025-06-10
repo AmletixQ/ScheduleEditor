@@ -11,12 +11,12 @@ namespace ScheduleEditor
 
     public enum TWeek
     {
-        BOTH,
         EVEN,
         ODD,
+        BOTH,
     }
 
-    internal class Lesson
+    public class Lesson
     {
         public string Name { get; set; }
         public string Teacher { get; set; }
@@ -46,6 +46,25 @@ namespace ScheduleEditor
                 case TLesson.LABORATORY:
                     LessonType = "Лабораторная"; break;
             }
+        }
+
+        public static Lesson LoadFromString(string lessonString)
+        {
+            string[] parts = lessonString.Split('|');
+            if (parts.Length < 4) throw new ArgumentException("Invalid lesson string format.");
+
+            string name = parts[0];
+            string teacher = parts[1];
+            string classroom = parts[2];
+            TLesson lessonType = (TLesson)Enum.Parse(typeof(TLesson), parts[3], true);
+            TWeek weekType = (TWeek)Enum.Parse(typeof(TWeek), parts[4], true);
+
+            return new Lesson(name, teacher, classroom, lessonType, weekType);
+        }
+
+        public override string ToString()
+        {
+            return $"{LessonType} {Name} {Teacher} {WeekType}";
         }
     }
 }

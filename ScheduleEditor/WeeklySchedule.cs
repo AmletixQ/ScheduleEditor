@@ -52,7 +52,27 @@ namespace ScheduleEditor
 
             string jsonString = JsonSerializer.Serialize(Schedule, options);
             File.WriteAllText(filename, jsonString);
-            MessageBox.Show("WRITED " + filename);
+        }
+
+        public void ReadFromJson(string filename)
+        {
+            string jsonString = File.ReadAllText(filename);
+            var options = new JsonSerializerOptions()
+            {
+                PropertyNameCaseInsensitive = true,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+            };
+
+            Schedule = JsonSerializer.Deserialize<Dictionary<TDay, List<Lesson>>>(jsonString, options)
+                ?? new Dictionary<TDay, List<Lesson>>()
+            {
+                { TDay.MONDAY, new List<Lesson>() },
+                { TDay.TUESDAY, new List<Lesson>() },
+                { TDay.WEDNESDAY, new List<Lesson>() },
+                { TDay.THURSDAY, new List<Lesson>() },
+                { TDay.FRIDAY, new List<Lesson>() },
+                { TDay.SATURDAY, new List<Lesson>() },
+            };
         }
     }
 }
