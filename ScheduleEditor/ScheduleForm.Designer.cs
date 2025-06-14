@@ -96,8 +96,10 @@
             this.ScheduleDataGrid.Margin = new System.Windows.Forms.Padding(2);
             this.ScheduleDataGrid.Name = "ScheduleDataGrid";
             this.ScheduleDataGrid.ReadOnly = true;
+
             this.ScheduleDataGrid.RowHeadersVisible = false;
             this.ScheduleDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+
             this.ScheduleDataGrid.RowTemplate.Height = 24;
             this.ScheduleDataGrid.Size = new System.Drawing.Size(779, 383);
             this.ScheduleDataGrid.TabIndex = 4;

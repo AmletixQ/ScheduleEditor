@@ -117,6 +117,12 @@
     <EmbeddedResource Include="ScheduleForm.resx">
       <DependentUpon>ScheduleForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="database\test.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="database\Факультеты\ФМКН\ПМИ\1 курс\1 группа\1 подгруппа.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -135,9 +141,6 @@
     <Content Include="database\users.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="database\Факультеты\ФМКН\ПМИ\1 курс\1 группа\1 подгруппа.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="database\Факультеты\ФМКН\ПМИ\1 курс\1 группа\2 подгруппа.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

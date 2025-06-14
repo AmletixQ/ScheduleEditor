@@ -62,9 +62,10 @@ namespace ScheduleEditor
                         string current = e.ToString();
                         if (BreadCrumbs.Contains(current)) return;
 
+
                         if (BreadCrumbs[BreadCrumbs.Count - 1].Contains(".json"))
                             BreadCrumbs[BreadCrumbs.Count - 1] = file;
-
+                            
                         BreadCrumbs.Add(file);
                         ScheduleDataGrid.Visible = true;
                     };
