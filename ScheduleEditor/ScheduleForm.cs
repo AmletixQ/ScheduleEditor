@@ -141,6 +141,7 @@ namespace ScheduleEditor
             if (rowIndex < 0 || columnIndex < 1) return;
 
             string lessonData = ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value?.ToString() ?? "";
+            MessageBox.Show("[" + lessonData + "]");
             if (string.IsNullOrEmpty(lessonData))
             {
                 EditLessonForm editLessonForm = new EditLessonForm();

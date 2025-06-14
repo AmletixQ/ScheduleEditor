@@ -46,11 +46,11 @@ namespace ScheduleEditor
                 case TLesson.LABORATORY:
                     LessonType = "Лабораторная"; break;
             }
-        }
+            }
 
         public static Lesson LoadFromString(string lessonString)
         {
-            string[] parts = lessonString.Split('|');
+            string[] parts = lessonString.Split(' ');
             if (parts.Length < 4) throw new ArgumentException("Invalid lesson string format.");
 
             string name = parts[0];

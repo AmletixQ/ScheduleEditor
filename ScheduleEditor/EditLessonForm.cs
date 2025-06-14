@@ -5,17 +5,13 @@ namespace ScheduleEditor
 {
     public partial class EditLessonForm : Form
     {
-        public string LessonName { get; set; }
-        public string Teacher { get; set; }
-        public TLesson LessonType { get; set; }
-        public TWeek WeekType { get; set; }
-        public string Classroom { get; set; }
+        public string LessonName { get; set; } = null;
+        public string Teacher { get; set; } = null;
+        public TLesson? LessonType { get; set; } = null;
+        public TWeek? WeekType { get; set; } = null;
+        public string Classroom { get; set; } = null;
 
-        public EditLessonForm()
-        {
-            InitializeComponent();
-        }
-
+        public EditLessonForm() => InitializeComponent();
         public EditLessonForm(Lesson lesson) : this()
         {
             InputLessonName.Text = lesson.Name;
@@ -32,16 +28,8 @@ namespace ScheduleEditor
 
         public string GetViewLessonString()
         {
-            string lessonType = LessonType == TLesson.LECTURE ? "Лекция" :
-                          LessonType == TLesson.SEMINAR ? "Семинар" :
-                          "Лаборатория";
-
-            if (string.IsNullOrEmpty(LessonName) && lessonType == "Лекция") return "";
-
-            string weekType = WeekType == TWeek.EVEN ? "Четная" :
-                          WeekType == TWeek.ODD ? "Нечетная" :
-                          "Оба";
-            return $"{LessonName} {Classroom} {Teacher} {lessonType} {weekType}";
+            
+            return $"{LessonName} {Classroom} {Teacher} {LessonType} {WeekType}".Trim();
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
