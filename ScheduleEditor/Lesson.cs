@@ -26,24 +26,46 @@ namespace ScheduleEditor
         public TLesson LessonType { get; set; }
         public TWeek WeekType { get; set; } = TWeek.BOTH;
 
+        public Lesson() { }
+
+        public Lesson(
+            string name,
+            string teacher,
+            string classroom
+        )
+        {
+            Name = name;
+            Teacher = teacher;
+            Classroom = classroom;
+        }
+
+        public Lesson(
+            string name,
+            string teacher,
+            string classroom,
+            int lessonTypeIndex,
+            int weekTypeIndex
+        ) : this(name, teacher, classroom)
+        {
+            LessonType = (TLesson)(lessonTypeIndex - 1);
+            WeekType = (TWeek)(weekTypeIndex - 1);
+        }
+
         public Lesson(
             string name,
             string teacher,
             string classroom,
             TLesson lessonType,
             TWeek week
-        )
+        ) : this(name, teacher, classroom)
         {
-            Name = name;
-            Teacher = teacher;
-            Classroom = classroom;
             WeekType = week;
             LessonType = lessonType;
         }
 
         public static Lesson LoadFromString(string lessonString)
         {
-            string[] parts = lessonString.Split(' ');
+            string[] parts = lessonString.Split(',');
             if (parts.Length < 4) throw new ArgumentException("Invalid lesson string format.");
 
             List<string> tlessons = new List<string>() { "Лекция", "Семинар", "Лабораторная" };
@@ -85,7 +107,7 @@ namespace ScheduleEditor
                     throw new InvalidOperationException("Неизвестный тип недели.");
             }
 
-            return $"{Name} {Teacher} {Classroom} {lessonType} {weekType}";
+            return $"{Name},{Teacher},{Classroom},{lessonType},{weekType}";
         }
     }
 }

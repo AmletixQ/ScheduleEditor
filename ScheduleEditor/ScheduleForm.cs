@@ -28,9 +28,9 @@ namespace ScheduleEditor
             BreadCrumbs = new List<string>() { "database", "Факультеты", facultyName };
             UpdateNavigation();
 
-            weeklySchedule.AddLesson(
-                TDay.MONDAY, "Математический анализ", "301", "Кулаев", TLesson.LECTURE, TWeek.ODD
-            );
+            //weeklySchedule.AddLesson(
+            //    TDay.MONDAY, "Математический анализ", "301", "Кулаев", TLesson.LECTURE, TWeek.ODD
+            //);
         }
 
         private void UpdateNavigation()
@@ -68,6 +68,9 @@ namespace ScheduleEditor
                             
                         BreadCrumbs.Add(file);
                         ScheduleDataGrid.Visible = true;
+
+                        weeklySchedule.ReadFromJson(BuildPath());
+                        UpdateScheduleGrid();
                     };
                 }
                 else
@@ -91,6 +94,24 @@ namespace ScheduleEditor
             }
 
             ScheduleDataGrid.Visible = BreadCrumbs[BreadCrumbs.Count - 1].Contains(".json");
+        }
+
+        private void UpdateScheduleGrid()
+        {
+            ScheduleDataGrid.Rows.Clear();
+            ScheduleDataGrid.RowCount = 4;
+            ScheduleDataGrid.Rows[0].Cells[0].Value = "9:00-10:30";
+            ScheduleDataGrid.Rows[1].Cells[0].Value = "10:40-12:10";
+            ScheduleDataGrid.Rows[2].Cells[0].Value = "12:50-14:20";
+            ScheduleDataGrid.Rows[3].Cells[0].Value = "14:30-16:00";
+
+            for (int i = 0; i < 4; ++i)
+                for (int j = 1; j <= 6; ++j)
+                    if (weeklySchedule.Schedule[(TDay)(j - 1)].Count > i)
+                    {
+                        MessageBox.Show(weeklySchedule.Schedule[(TDay)(j - 1)]?[i].ToString());
+                        ScheduleDataGrid.Rows[i].Cells[j].Value = weeklySchedule.Schedule[(TDay)(j - 1)]?[i].ToString() ?? "";
+                    }
         }
 
         private string BuildPath(int outDir = 0)
@@ -143,17 +164,19 @@ namespace ScheduleEditor
 
             string lessonData = ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value?.ToString() ?? "";
 
+            Lesson lesson;
+
             if (string.IsNullOrEmpty(lessonData))
             {
                 EditLessonForm editLessonForm = new EditLessonForm();
                 editLessonForm.ShowDialog();
 
-                Lesson newLesson = editLessonForm.GetLesson();
+                lesson = editLessonForm.GetLesson();
 
-                ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value = newLesson.ToString();
+                ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value = lesson.ToString();
             } else
             {
-                Lesson lesson = Lesson.LoadFromString(lessonData);
+                lesson = Lesson.LoadFromString(lessonData);
                 if (lesson == null) return;
 
                 EditLessonForm editLessonForm = new EditLessonForm(lesson);
@@ -163,6 +186,9 @@ namespace ScheduleEditor
                 ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value = lesson.ToString();
             }
 
+            weeklySchedule.AddLesson((TDay)(columnIndex - 1), lesson);
+            //MessageBox.Show(BuildPath());
+            weeklySchedule.WriteToJson(BuildPath());
         }
     }
 }

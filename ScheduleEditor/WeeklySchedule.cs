@@ -33,6 +33,11 @@ namespace ScheduleEditor
             { TDay.SATURDAY, new List<Lesson>() },
         };
 
+        public void AddLesson(TDay day, Lesson lesson)
+        {
+            Schedule[day].Add(lesson);
+        }
+
         public void AddLesson(TDay day, string name, string classroom, string teacher, TLesson type, TWeek week)
         {
             Schedule[day].Add(
@@ -56,23 +61,20 @@ namespace ScheduleEditor
 
         public void ReadFromJson(string filename)
         {
+            if (!File.Exists(filename)) return;
+
             string jsonString = File.ReadAllText(filename);
             var options = new JsonSerializerOptions()
             {
-                PropertyNameCaseInsensitive = true,
+                PropertyNameCaseInsensitive = false,
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
             };
 
-            Schedule = JsonSerializer.Deserialize<Dictionary<TDay, List<Lesson>>>(jsonString, options)
-                ?? new Dictionary<TDay, List<Lesson>>()
-            {
-                { TDay.MONDAY, new List<Lesson>() },
-                { TDay.TUESDAY, new List<Lesson>() },
-                { TDay.WEDNESDAY, new List<Lesson>() },
-                { TDay.THURSDAY, new List<Lesson>() },
-                { TDay.FRIDAY, new List<Lesson>() },
-                { TDay.SATURDAY, new List<Lesson>() },
-            };
+            var stringSchedule = JsonSerializer.Deserialize<Dictionary<string, List<Lesson>>>(jsonString);
+
+            foreach (var kvp in stringSchedule)
+                if (Enum.TryParse<TDay>(kvp.Key, ignoreCase: true, out var day))
+                    Schedule[day] = kvp.Value;
         }
     }
 }
