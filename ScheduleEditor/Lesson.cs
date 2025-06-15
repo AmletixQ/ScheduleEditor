@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ScheduleEditor
 {
@@ -21,7 +23,7 @@ namespace ScheduleEditor
         public string Name { get; set; }
         public string Teacher { get; set; }
         public string Classroom { get; set; }
-        public string LessonType { get; set; }
+        public TLesson LessonType { get; set; }
         public TWeek WeekType { get; set; } = TWeek.BOTH;
 
         public Lesson(
@@ -36,35 +38,54 @@ namespace ScheduleEditor
             Teacher = teacher;
             Classroom = classroom;
             WeekType = week;
-
-            switch (lessonType)
-            {
-                case TLesson.LECTURE:
-                    LessonType = "Лекция"; break;
-                case TLesson.SEMINAR:
-                    LessonType = "Практика"; break;
-                case TLesson.LABORATORY:
-                    LessonType = "Лабораторная"; break;
-            }
-            }
+            LessonType = lessonType;
+        }
 
         public static Lesson LoadFromString(string lessonString)
         {
             string[] parts = lessonString.Split(' ');
             if (parts.Length < 4) throw new ArgumentException("Invalid lesson string format.");
 
+            List<string> tlessons = new List<string>() { "Лекция", "Семинар", "Лабораторная" };
+            List<string> tweeks = new List<string>() { "Четная", "Нечетная", "Обе" };
+
             string name = parts[0];
             string teacher = parts[1];
             string classroom = parts[2];
-            TLesson lessonType = (TLesson)Enum.Parse(typeof(TLesson), parts[3], true);
-            TWeek weekType = (TWeek)Enum.Parse(typeof(TWeek), parts[4], true);
+            TLesson lessonType = (TLesson)tlessons.IndexOf(parts[3]);
+            TWeek weekType = (TWeek)tweeks.IndexOf(parts[4]);
 
             return new Lesson(name, teacher, classroom, lessonType, weekType);
         }
 
         public override string ToString()
         {
-            return $"{LessonType} {Name} {Teacher} {WeekType}";
+            string lessonType, weekType;
+            switch (LessonType)
+            {
+                case TLesson.LECTURE:
+                    lessonType = "Лекция"; break;
+                case TLesson.SEMINAR:
+                    lessonType = "Семинар"; break;
+                case TLesson.LABORATORY:
+                    lessonType = "Лабораторная"; break;
+                default:
+                    throw new InvalidOperationException("Неизвестный тип занятия.");
+            }
+
+            switch (WeekType)
+            {
+                case TWeek.EVEN:
+                    weekType = "Четная"; break;
+                case TWeek.ODD:
+                    weekType = "Нечетная"; break;
+                case TWeek.BOTH:
+                    weekType = "Обе"; break;
+                default:
+                    throw new InvalidOperationException("Неизвестный тип недели.");
+            }
+
+            return $"{Name} {Teacher} {Classroom} {lessonType} {weekType}";
         }
     }
 }

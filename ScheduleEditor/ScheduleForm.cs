@@ -142,20 +142,25 @@ namespace ScheduleEditor
             if (rowIndex < 0 || columnIndex < 1) return;
 
             string lessonData = ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value?.ToString() ?? "";
-            MessageBox.Show("[" + lessonData + "]");
+
             if (string.IsNullOrEmpty(lessonData))
             {
                 EditLessonForm editLessonForm = new EditLessonForm();
                 editLessonForm.ShowDialog();
 
-                ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value = editLessonForm.GetViewLessonString();
+                Lesson newLesson = editLessonForm.GetLesson();
+
+                ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value = newLesson.ToString();
             } else
             {
                 Lesson lesson = Lesson.LoadFromString(lessonData);
                 if (lesson == null) return;
+
                 EditLessonForm editLessonForm = new EditLessonForm(lesson);
                 editLessonForm.ShowDialog();
-                ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value = editLessonForm.GetViewLessonString();
+
+                lesson = editLessonForm.GetLesson();
+                ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value = lesson.ToString();
             }
 
         }
