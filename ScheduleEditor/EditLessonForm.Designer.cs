@@ -196,7 +196,7 @@
         private System.Windows.Forms.TextBox InputLessonName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button SaveButton;
-        private System.Windows.Forms.Button CancelButton;
+        private new System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.TextBox InputTeacher;
         private System.Windows.Forms.Label label4;

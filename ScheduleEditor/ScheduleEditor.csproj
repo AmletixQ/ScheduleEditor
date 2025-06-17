@@ -126,9 +126,6 @@
     <EmbeddedResource Include="ScheduleForm.resx">
       <DependentUpon>ScheduleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="database\test.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="database\Факультеты\ФМКН\ПМИ\1 курс\1 группа\1 подгруппа.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

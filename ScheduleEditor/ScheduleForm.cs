@@ -126,8 +126,7 @@ namespace ScheduleEditor
             for (int i = 0; i < 4; ++i)
                 for (int j = 1; j <= 6; ++j)
                     if (weeklySchedule.Schedule.ContainsKey((TDay)(j - 1)))
-                        if (weeklySchedule.Schedule[(TDay)(j - 1)].Count > i)
-                            ScheduleDataGrid.Rows[i].Cells[j].Value = weeklySchedule.Schedule[(TDay)(j - 1)]?[i].ToString() ?? "";
+                        ScheduleDataGrid.Rows[i].Cells[j].Value = weeklySchedule.Schedule[(TDay)(j - 1)]?[i]?.ToString() ?? "";
         }
 
         private string BuildPath(int outDir = 0)
@@ -162,8 +161,10 @@ namespace ScheduleEditor
 
         private void BackButton_Click(object sender, EventArgs e)
         {
+            _selected = null;
             BreadCrumbs.RemoveAt(BreadCrumbs.Count - 1);
             UpdateNavigation();
+            UpdateRemoveButton();
         }
 
         private void CreateButton_Click(object sender, EventArgs e)
@@ -225,9 +226,11 @@ namespace ScheduleEditor
 
             Lesson lesson;
 
+            MessageBox.Show(rowIndex.ToString());
+
             if (string.IsNullOrEmpty(lessonData))
             {
-                EditLessonForm editLessonForm = new EditLessonForm();
+                EditLessonForm editLessonForm = new EditLessonForm(rowIndex);
                 editLessonForm.ShowDialog();
 
                 lesson = editLessonForm.GetLesson();
@@ -239,7 +242,7 @@ namespace ScheduleEditor
                 lesson = Lesson.LoadFromString(lessonData);
                 if (lesson == null) return;
 
-                EditLessonForm editLessonForm = new EditLessonForm(lesson);
+                EditLessonForm editLessonForm = new EditLessonForm(rowIndex, lesson);
                 editLessonForm.ShowDialog();
 
                 lesson = editLessonForm.GetLesson();

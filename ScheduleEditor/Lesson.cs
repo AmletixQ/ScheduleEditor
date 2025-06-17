@@ -20,6 +20,7 @@ namespace ScheduleEditor
 
     public class Lesson
     {
+        public int Order { get; set; }
         public string Name { get; set; }
         public string Teacher { get; set; }
         public string Classroom { get; set; }
@@ -29,40 +30,44 @@ namespace ScheduleEditor
         public Lesson() { }
 
         public Lesson(
+            int order,
             string name,
             string teacher,
             string classroom
         )
         {
+            Order = order;
             Name = name;
             Teacher = teacher;
             Classroom = classroom;
         }
 
         public Lesson(
+            int order,
             string name,
             string teacher,
             string classroom,
             int lessonTypeIndex,
             int weekTypeIndex
-        ) : this(name, teacher, classroom)
+        ) : this(order, name, teacher, classroom)
         {
             LessonType = (TLesson)(lessonTypeIndex - 1);
             WeekType = (TWeek)(weekTypeIndex - 1);
         }
 
         public Lesson(
+            int order,
             string name,
             string teacher,
             string classroom,
             TLesson lessonType,
             TWeek week
-        ) : this(name, teacher, classroom)
+        ) : this(order, name, teacher, classroom)
         {
             WeekType = week;
             LessonType = lessonType;
         }
-
+        
         public static Lesson LoadFromString(string lessonString)
         {
             string[] parts = lessonString.Split(',');
@@ -77,7 +82,7 @@ namespace ScheduleEditor
             TLesson lessonType = (TLesson)tlessons.IndexOf(parts[3]);
             TWeek weekType = (TWeek)tweeks.IndexOf(parts[4]);
 
-            return new Lesson(name, teacher, classroom, lessonType, weekType);
+            return new Lesson(0, name, teacher, classroom, lessonType, weekType);
         }
 
         public override string ToString()

@@ -23,29 +23,27 @@ namespace ScheduleEditor
 
     internal class WeeklySchedule
     {
-        public Dictionary<TDay, List<Lesson>> Schedule = new Dictionary<TDay, List<Lesson>>()
+        public Dictionary<TDay, Lesson[]> Schedule = new Dictionary<TDay, Lesson[]>()
         {
-            { TDay.MONDAY, new List<Lesson>() },
-            { TDay.TUESDAY, new List<Lesson>() },
-            { TDay.WEDNESDAY, new List<Lesson>() },
-            { TDay.THURSDAY, new List<Lesson>() },
-            { TDay.FRIDAY, new List<Lesson>() },
-            { TDay.SATURDAY, new List<Lesson>() },
+            { TDay.MONDAY, new Lesson[4] },
+            { TDay.TUESDAY, new Lesson[4] },
+            { TDay.WEDNESDAY, new Lesson[4] },
+            { TDay.THURSDAY, new Lesson[4] },
+            { TDay.FRIDAY, new Lesson[4] },
+            { TDay.SATURDAY, new Lesson[4] },
         };
 
         public void AddLesson(TDay day, Lesson lesson)
         {
-            Schedule[day].Add(lesson);
+            Schedule[day][lesson.Order] = lesson;
         }
 
-        public void AddLesson(TDay day, string name, string classroom, string teacher, TLesson type, TWeek week)
+        public void AddLesson(TDay day, int order, string name, string classroom, string teacher, TLesson type, TWeek week)
         {
-            Schedule[day].Add(
-                new Lesson(name, teacher, classroom, type, week)
-            );
+            Schedule[day][order] = new Lesson(order, name, teacher, classroom, type, week);
         }
 
-        public void RemoveLesson(TDay day, Lesson lesson) => Schedule[day].Remove(lesson);
+        public void RemoveLesson(TDay day, Lesson lesson) => Schedule[day][lesson.Order] = null;
 
         public void WriteToJson(string filename)
         {
@@ -70,7 +68,7 @@ namespace ScheduleEditor
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
             };
 
-            var stringSchedule = JsonSerializer.Deserialize<Dictionary<string, List<Lesson>>>(jsonString);
+            var stringSchedule = JsonSerializer.Deserialize<Dictionary<string, Lesson[]>>(jsonString);
 
             foreach (var kvp in stringSchedule)
                 if (Enum.TryParse<TDay>(kvp.Key, ignoreCase: true, out var day))

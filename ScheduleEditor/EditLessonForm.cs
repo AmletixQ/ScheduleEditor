@@ -11,10 +11,16 @@ namespace ScheduleEditor
         public TWeek? WeekType { get; set; } = null;
         public string Classroom { get; set; } = null;
 
+        int order;
+
         public EditLessonForm() => InitializeComponent();
 
-        public EditLessonForm(Lesson lesson) : this()
+        public EditLessonForm(int order) : this() => this.order = order;
+
+        public EditLessonForm(int order, Lesson lesson) : this()
         {
+            this.order = order;
+
             InputLessonName.Text = lesson.Name;
             InputTeacher.Text = lesson.Teacher;
             LessonTypeDropBox.SelectedIndex = (int)lesson.LessonType;
@@ -25,6 +31,7 @@ namespace ScheduleEditor
         public Lesson GetLesson()
         {
             return new Lesson(
+                order,
                 InputLessonName.Text,
                 InputTeacher.Text,
                 InputClassroom.Text,
