@@ -83,6 +83,12 @@
     <Compile Include="AuthForm.Designer.cs">
       <DependentUpon>AuthForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateNewFolderOrFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateNewFolderOrFile.Designer.cs">
+      <DependentUpon>CreateNewFolderOrFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditLessonForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     <EmbeddedResource Include="AuthForm.resx">
       <DependentUpon>AuthForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CreateNewFolderOrFile.resx">
+      <DependentUpon>CreateNewFolderOrFile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditLessonForm.resx">
       <DependentUpon>EditLessonForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -117,9 +126,6 @@
     <EmbeddedResource Include="ScheduleForm.resx">
       <DependentUpon>ScheduleForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="database\test.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="database\Факультеты\ФМКН\ПМИ\1 курс\1 группа\1 подгруппа.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

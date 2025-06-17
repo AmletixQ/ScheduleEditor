@@ -40,6 +40,8 @@
             this.Thursday = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Friday = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Saturday = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmptyFolderLabel = new System.Windows.Forms.Label();
+            this.RemoveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ScheduleDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,9 +58,9 @@
             // FlowNavigation
             // 
             this.FlowNavigation.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.FlowNavigation.Location = new System.Drawing.Point(4, 27);
+            this.FlowNavigation.Location = new System.Drawing.Point(4, 43);
             this.FlowNavigation.Name = "FlowNavigation";
-            this.FlowNavigation.Size = new System.Drawing.Size(124, 383);
+            this.FlowNavigation.Size = new System.Drawing.Size(124, 367);
             this.FlowNavigation.TabIndex = 1;
             // 
             // CreateButton
@@ -96,10 +98,8 @@
             this.ScheduleDataGrid.Margin = new System.Windows.Forms.Padding(2);
             this.ScheduleDataGrid.Name = "ScheduleDataGrid";
             this.ScheduleDataGrid.ReadOnly = true;
-
             this.ScheduleDataGrid.RowHeadersVisible = false;
             this.ScheduleDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-
             this.ScheduleDataGrid.RowTemplate.Height = 24;
             this.ScheduleDataGrid.Size = new System.Drawing.Size(779, 383);
             this.ScheduleDataGrid.TabIndex = 4;
@@ -163,11 +163,36 @@
             this.Saturday.ReadOnly = true;
             this.Saturday.Width = 120;
             // 
+            // EmptyFolderLabel
+            // 
+            this.EmptyFolderLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.EmptyFolderLabel.AutoSize = true;
+            this.EmptyFolderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.EmptyFolderLabel.Location = new System.Drawing.Point(1, 24);
+            this.EmptyFolderLabel.Name = "EmptyFolderLabel";
+            this.EmptyFolderLabel.Size = new System.Drawing.Size(98, 16);
+            this.EmptyFolderLabel.TabIndex = 5;
+            this.EmptyFolderLabel.Text = "Здесь пусто";
+            this.EmptyFolderLabel.Visible = false;
+            // 
+            // RemoveButton
+            // 
+            this.RemoveButton.Enabled = false;
+            this.RemoveButton.Location = new System.Drawing.Point(166, 425);
+            this.RemoveButton.Name = "RemoveButton";
+            this.RemoveButton.Size = new System.Drawing.Size(75, 23);
+            this.RemoveButton.TabIndex = 6;
+            this.RemoveButton.Text = "Удалить";
+            this.RemoveButton.UseVisualStyleBackColor = true;
+            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
+            // 
             // ScheduleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(953, 457);
+            this.Controls.Add(this.RemoveButton);
+            this.Controls.Add(this.EmptyFolderLabel);
             this.Controls.Add(this.ScheduleDataGrid);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.CreateButton);
@@ -195,6 +220,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Thursday;
         private System.Windows.Forms.DataGridViewTextBoxColumn Friday;
         private System.Windows.Forms.DataGridViewTextBoxColumn Saturday;
+        private System.Windows.Forms.Label EmptyFolderLabel;
+        private System.Windows.Forms.Button RemoveButton;
     }
 }
 
