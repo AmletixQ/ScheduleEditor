@@ -15,22 +15,13 @@ namespace ScheduleEditor
         public ScheduleForm()
         {
             InitializeComponent();
-            ScheduleDataGrid.RowCount = 4;
-            ScheduleDataGrid.Rows[0].Cells[0].Value = "9:00-10:30";
-            ScheduleDataGrid.Rows[1].Cells[0].Value = "10:40-12:10";
-            ScheduleDataGrid.Rows[2].Cells[0].Value = "12:50-14:20";
-            ScheduleDataGrid.Rows[3].Cells[0].Value = "14:30-16:00";
+            UpdateScheduleGrid();
         }
 
         public ScheduleForm(string facultyName) : this()
-
         {
             BreadCrumbs = new List<string>() { "database", "Факультеты", facultyName };
             UpdateNavigation();
-
-            //weeklySchedule.AddLesson(
-            //    TDay.MONDAY, "Математический анализ", "301", "Кулаев", TLesson.LECTURE, TWeek.ODD
-            //);
         }
 
         private void UpdateNavigation()
@@ -57,14 +48,15 @@ namespace ScheduleEditor
 
                     control.DoubleClick += (object sender, EventArgs e) =>
                     {
-                        if (BreadCrumbs.Contains(file)) return;
-
                         string current = e.ToString();
                         if (BreadCrumbs.Contains(current)) return;
 
 
                         if (BreadCrumbs[BreadCrumbs.Count - 1].Contains(".json"))
-                            BreadCrumbs[BreadCrumbs.Count - 1] = file;
+                        {
+                            weeklySchedule.Schedule.Clear();
+                            BreadCrumbs.RemoveAt(BreadCrumbs.Count - 1);
+                        }
                             
                         BreadCrumbs.Add(file);
                         ScheduleDataGrid.Visible = true;
@@ -107,11 +99,9 @@ namespace ScheduleEditor
 
             for (int i = 0; i < 4; ++i)
                 for (int j = 1; j <= 6; ++j)
-                    if (weeklySchedule.Schedule[(TDay)(j - 1)].Count > i)
-                    {
-                        MessageBox.Show(weeklySchedule.Schedule[(TDay)(j - 1)]?[i].ToString());
-                        ScheduleDataGrid.Rows[i].Cells[j].Value = weeklySchedule.Schedule[(TDay)(j - 1)]?[i].ToString() ?? "";
-                    }
+                    if (weeklySchedule.Schedule.ContainsKey((TDay)(j - 1)))
+                        if (weeklySchedule.Schedule[(TDay)(j - 1)].Count > i)
+                            ScheduleDataGrid.Rows[i].Cells[j].Value = weeklySchedule.Schedule[(TDay)(j - 1)]?[i].ToString() ?? "";
         }
 
         private string BuildPath(int outDir = 0)
@@ -187,7 +177,6 @@ namespace ScheduleEditor
             }
 
             weeklySchedule.AddLesson((TDay)(columnIndex - 1), lesson);
-            //MessageBox.Show(BuildPath());
             weeklySchedule.WriteToJson(BuildPath());
         }
     }
