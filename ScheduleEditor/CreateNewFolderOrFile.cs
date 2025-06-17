@@ -45,5 +45,11 @@ namespace ScheduleEditor
 
             DialogResult = DialogResult.OK;
         }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
     }
 }

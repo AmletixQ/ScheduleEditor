@@ -176,12 +176,43 @@ namespace ScheduleEditor
             CreateNewFolderOrFile form = new CreateNewFolderOrFile(path);
             form.ShowDialog();
 
-            if (form.DialogResult != DialogResult.OK)
-                MessageBox.Show("Что-то пошло не так!");
-            else
+            if (form.DialogResult == DialogResult.OK)
                 MessageBox.Show("Успешный успех при создании!");
+            else if (form.DialogResult == DialogResult.Cancel)
+                return;
 
             UpdateNavigation();
+        }
+
+        private void RemoveButton_Click(object sender, EventArgs e)
+        {
+            if (_selected == null) return;
+
+            string path = BuildPath();
+            if (_selecterIsFolder)
+            {
+                string folderPath = Path.Combine(path, _selected.Text);
+
+                if (MessageBox.Show("Вы действительно хотите удалить папку " + _selected.Text + "?", "Удаление папки", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    Directory.Delete(folderPath, true);
+                    MessageBox.Show("Папка успешно удалена!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                string folderPath = Path.Combine(path, _selected.Text + ".json");
+
+                if (MessageBox.Show("Вы действительно хотите удалить файл " + _selected.Text + "?", "Удаление файла", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    File.Delete(folderPath);
+                    MessageBox.Show("Файл успешно удален!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+
+            UpdateNavigation();
+            _selected = null;
+            UpdateRemoveButton();
         }
 
         private void ScheduleDataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -219,35 +250,5 @@ namespace ScheduleEditor
             weeklySchedule.WriteToJson(BuildPath());
         }
 
-        private void RemoveButton_Click(object sender, EventArgs e)
-        {
-            if (_selected == null) return;
-
-            string path = BuildPath();
-            if (_selecterIsFolder)
-            {
-                string folderPath = Path.Combine(path, _selected.Text);
-
-                if (MessageBox.Show("Вы действительно хотите удалить папку " + _selected.Text + "?", "Удаление папки", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                {
-                    Directory.Delete(folderPath, true);
-                    MessageBox.Show("Папка успешно удалена!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            else
-            {
-                string folderPath = Path.Combine(path, _selected.Text + ".json");
-
-                if (MessageBox.Show("Вы действительно хотите удалить файл " + _selected.Text + "?", "Удаление файла", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-                {
-                    File.Delete(folderPath);
-                    MessageBox.Show("Файл успешно удален!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-
-            UpdateNavigation();
-            _selected = null;
-            UpdateRemoveButton();
-        }
     }
 }
