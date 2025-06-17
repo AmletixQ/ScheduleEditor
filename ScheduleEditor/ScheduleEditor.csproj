@@ -83,6 +83,12 @@
     <Compile Include="AuthForm.Designer.cs">
       <DependentUpon>AuthForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateNewFolderOrFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateNewFolderOrFile.Designer.cs">
+      <DependentUpon>CreateNewFolderOrFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditLessonForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     <Compile Include="WeeklySchedule.cs" />
     <EmbeddedResource Include="AuthForm.resx">
       <DependentUpon>AuthForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateNewFolderOrFile.resx">
+      <DependentUpon>CreateNewFolderOrFile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditLessonForm.resx">
       <DependentUpon>EditLessonForm.cs</DependentUpon>

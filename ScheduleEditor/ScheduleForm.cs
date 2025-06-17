@@ -12,6 +12,9 @@ namespace ScheduleEditor
         private List<string> BreadCrumbs;
         WeeklySchedule weeklySchedule = new WeeklySchedule();
 
+        Control _selected = null;
+        bool _selecterIsFolder = false;
+
         public ScheduleForm()
         {
             InitializeComponent();
@@ -24,13 +27,19 @@ namespace ScheduleEditor
             UpdateNavigation();
         }
 
+        public void UpdateRemoveButton()
+        {
+            RemoveButton.Enabled = _selected != null;
+        }
+
         private void UpdateNavigation()
         {
-
             BackButton.Enabled = BreadCrumbs.Count > 3;
 
             FlowNavigation.Controls.Clear();
             List<string> folders = GetFolders();
+
+            EmptyFolderLabel.Visible = folders.Count == 0;
 
             foreach (string file in folders)
             {
@@ -57,7 +66,7 @@ namespace ScheduleEditor
                             weeklySchedule.Schedule.Clear();
                             BreadCrumbs.RemoveAt(BreadCrumbs.Count - 1);
                         }
-                            
+
                         BreadCrumbs.Add(file);
                         ScheduleDataGrid.Visible = true;
 
@@ -72,7 +81,8 @@ namespace ScheduleEditor
                         Text = file,
                         BorderStyle = BorderStyle.FixedSingle,
                         TextAlign = ContentAlignment.MiddleCenter,
-                        BackColor = SystemColors.ControlLight
+                        BackColor = SystemColors.ControlLight,
+                        Margin = new Padding(0, 0, 0, 4)
                     };
 
                     control.DoubleClick += (object sender, EventArgs e) =>
@@ -81,6 +91,22 @@ namespace ScheduleEditor
                         UpdateNavigation();
                     };
                 }
+
+                control.Click += (object sender, EventArgs e) =>
+                {
+                    _selecterIsFolder = !(sender is LinkLabel);
+
+                    _selected = (Control)sender;
+                    _selected.BackColor = Color.LightBlue;
+
+                    foreach (Control c in FlowNavigation.Controls)
+                        if (c != _selected)
+                            c.BackColor = SystemColors.ControlLight;
+
+                    UpdateRemoveButton();
+                };
+
+
 
                 FlowNavigation.Controls.Add(control);
             }
@@ -119,7 +145,7 @@ namespace ScheduleEditor
         {
             string path = BuildPath();
 
-            List<string> folders = 
+            List<string> folders =
                 Directory
                 .GetDirectories(path)
                 .Select(x => Path.GetFileName(x))
@@ -142,8 +168,20 @@ namespace ScheduleEditor
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            string path = BuildPath();
-            if (!path.Contains(".json")) return;
+            int outDir = 0;
+            if (BreadCrumbs.Last().Contains(".json"))
+                outDir = 1;
+
+            string path = BuildPath(outDir);
+            CreateNewFolderOrFile form = new CreateNewFolderOrFile(path);
+            form.ShowDialog();
+
+            if (form.DialogResult != DialogResult.OK)
+                MessageBox.Show("Что-то пошло не так!");
+            else
+                MessageBox.Show("Успешный успех при создании!");
+
+            UpdateNavigation();
         }
 
         private void ScheduleDataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -164,7 +202,8 @@ namespace ScheduleEditor
                 lesson = editLessonForm.GetLesson();
 
                 ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value = lesson.ToString();
-            } else
+            }
+            else
             {
                 lesson = Lesson.LoadFromString(lessonData);
                 if (lesson == null) return;
@@ -178,6 +217,37 @@ namespace ScheduleEditor
 
             weeklySchedule.AddLesson((TDay)(columnIndex - 1), lesson);
             weeklySchedule.WriteToJson(BuildPath());
+        }
+
+        private void RemoveButton_Click(object sender, EventArgs e)
+        {
+            if (_selected == null) return;
+
+            string path = BuildPath();
+            if (_selecterIsFolder)
+            {
+                string folderPath = Path.Combine(path, _selected.Text);
+
+                if (MessageBox.Show("Вы действительно хотите удалить папку " + _selected.Text + "?", "Удаление папки", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    Directory.Delete(folderPath, true);
+                    MessageBox.Show("Папка успешно удалена!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                string folderPath = Path.Combine(path, _selected.Text + ".json");
+
+                if (MessageBox.Show("Вы действительно хотите удалить файл " + _selected.Text + "?", "Удаление файла", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    File.Delete(folderPath);
+                    MessageBox.Show("Файл успешно удален!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+
+            UpdateNavigation();
+            _selected = null;
+            UpdateRemoveButton();
         }
     }
 }
