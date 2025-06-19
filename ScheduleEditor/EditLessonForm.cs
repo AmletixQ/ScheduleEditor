@@ -44,6 +44,7 @@ namespace ScheduleEditor
         {
             if (InputLessonName.Text == null || label.Text == null || LessonTypeDropBox.SelectedIndex == -1 || WeekTypeDropBox.SelectedIndex == -1 || InputClassroom.Text == null)
             {
+                DialogResult = DialogResult.Cancel;
                 this.Close();
                 return;
             }
@@ -54,11 +55,13 @@ namespace ScheduleEditor
             WeekType = (TWeek)WeekTypeDropBox.SelectedIndex;
             Classroom = InputClassroom.Text;
 
+            DialogResult = DialogResult.OK;
             this.Close();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
             this.Close();
         }
     }

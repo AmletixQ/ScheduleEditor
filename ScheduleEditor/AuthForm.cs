@@ -38,7 +38,7 @@ namespace ScheduleEditor
                 }
                 else
                 {
-                    MessageBox.Show("Неверный логи или пароль", "Ошибка аавторизации", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Неверный логин или пароль", "Ошибка аавторизации", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)

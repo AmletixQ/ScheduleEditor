@@ -199,9 +199,15 @@ namespace ScheduleEditor
                     Directory.Delete(folderPath, true);
                     MessageBox.Show("Папка успешно удалена!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                else return;
             }
             else
             {
+                if (BreadCrumbs.Last().Contains(".json"))
+                {
+                    MessageBox.Show("Вы не можете удалить файл из открытого расписания!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 string folderPath = Path.Combine(path, _selected.Text + ".json");
 
                 if (MessageBox.Show("Вы действительно хотите удалить файл " + _selected.Text + "?", "Удаление файла", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
@@ -209,6 +215,7 @@ namespace ScheduleEditor
                     File.Delete(folderPath);
                     MessageBox.Show("Файл успешно удален!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                else return;
             }
 
             UpdateNavigation();
@@ -231,6 +238,7 @@ namespace ScheduleEditor
                 EditLessonForm editLessonForm = new EditLessonForm(rowIndex);
                 editLessonForm.ShowDialog();
 
+                if (editLessonForm.DialogResult == DialogResult.Cancel) return;
                 lesson = editLessonForm.GetLesson();
 
                 ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value = lesson.ToString();
@@ -246,8 +254,6 @@ namespace ScheduleEditor
                 lesson = editLessonForm.GetLesson();
                 ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value = lesson.ToString();
             }
-
-            MessageBox.Show(columnIndex.ToString());
 
             weeklySchedule.AddLesson((TDay)(columnIndex - 1), lesson);
             weeklySchedule.WriteToJson(BuildPath());

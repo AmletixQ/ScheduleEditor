@@ -182,7 +182,7 @@
             this.Controls.Add(this.LessonTypeDropBox);
             this.Controls.Add(this.label1);
             this.Name = "EditLessonForm";
-            this.Text = "EditLessonForm";
+            this.Text = "Редактирование занятия";
             this.ResumeLayout(false);
             this.PerformLayout();
 
