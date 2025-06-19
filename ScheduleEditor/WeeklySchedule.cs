@@ -23,15 +23,23 @@ namespace ScheduleEditor
 
     internal class WeeklySchedule
     {
-        public Dictionary<TDay, Lesson[]> Schedule = new Dictionary<TDay, Lesson[]>()
+        public Dictionary<TDay, Lesson[]> Schedule;
+
+        public WeeklySchedule() => Clear();
+
+        public void Clear()
         {
-            { TDay.MONDAY, new Lesson[4] },
-            { TDay.TUESDAY, new Lesson[4] },
-            { TDay.WEDNESDAY, new Lesson[4] },
-            { TDay.THURSDAY, new Lesson[4] },
-            { TDay.FRIDAY, new Lesson[4] },
-            { TDay.SATURDAY, new Lesson[4] },
-        };
+            Schedule = new Dictionary<TDay, Lesson[]>()
+            {
+                { TDay.MONDAY, new Lesson[4] },
+                { TDay.TUESDAY, new Lesson[4] },
+                { TDay.WEDNESDAY, new Lesson[4] },
+                { TDay.THURSDAY, new Lesson[4] },
+                { TDay.FRIDAY, new Lesson[4] },
+                { TDay.SATURDAY, new Lesson[4] },
+            };
+        }
+
 
         public void AddLesson(TDay day, Lesson lesson)
         {
