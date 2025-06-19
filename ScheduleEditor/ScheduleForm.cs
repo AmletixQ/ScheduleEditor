@@ -203,6 +203,11 @@ namespace ScheduleEditor
             }
             else
             {
+                if (BreadCrumbs.Last().Contains(".json"))
+                {
+                    MessageBox.Show("Вы не можете удалить файл из открытого расписания!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 string folderPath = Path.Combine(path, _selected.Text + ".json");
 
                 if (MessageBox.Show("Вы действительно хотите удалить файл " + _selected.Text + "?", "Удаление файла", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
