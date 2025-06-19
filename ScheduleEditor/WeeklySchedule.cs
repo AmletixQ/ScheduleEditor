@@ -69,11 +69,11 @@ namespace ScheduleEditor
         {
             if (!File.Exists(filename)) return;
 
-            string jsonString = File.ReadAllText(filename);
+            string jsonString = File.ReadAllText(filename, Encoding.UTF8);
             var options = new JsonSerializerOptions()
             {
                 PropertyNameCaseInsensitive = false,
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                //Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
             };
 
             var stringSchedule = JsonSerializer.Deserialize<Dictionary<string, Lesson[]>>(jsonString);

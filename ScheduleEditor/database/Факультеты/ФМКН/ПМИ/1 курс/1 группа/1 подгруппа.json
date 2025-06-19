@@ -1,0 +1,115 @@
+{
+  "MONDAY": [
+    {
+      "Order": 0,
+      "Name": "Математический анализ",
+      "Teacher": "Кулаев Р. Ч.",
+      "Classroom": "301",
+      "LessonType": 0,
+      "WeekType": 0
+    },
+    {
+      "Order": 1,
+      "Name": "Алгоритмы и структуры данных",
+      "Teacher": "Олисаев Э. Г.",
+      "Classroom": "301",
+      "LessonType": 0,
+      "WeekType": 0
+    },
+    {
+      "Order": 2,
+      "Name": "Русский язык",
+      "Teacher": "Калмановна А. Э.",
+      "Classroom": "301",
+      "LessonType": 1,
+      "WeekType": 2
+    },
+    {
+      "Order": 3,
+      "Name": "История религий",
+      "Teacher": "Егиков А. А.",
+      "Classroom": "301",
+      "LessonType": 0,
+      "WeekType": 0
+    }
+  ],
+  "TUESDAY": [
+    {
+      "Order": 0,
+      "Name": "Линейная алгебра",
+      "Teacher": "Койбаев В. А.",
+      "Classroom": "301",
+      "LessonType": 0,
+      "WeekType": 2
+    },
+    {
+      "Order": 1,
+      "Name": "Основы и методологии программирования",
+      "Teacher": "Макаренко М. Д.",
+      "Classroom": "316",
+      "LessonType": 2,
+      "WeekType": 2
+    },
+    {
+      "Order": 2,
+      "Name": "История России",
+      "Teacher": "Батагова Л. Х.",
+      "Classroom": "301",
+      "LessonType": 1,
+      "WeekType": 2
+    },
+    null
+  ],
+  "WEDNESDAY": [
+    {
+      "Order": 0,
+      "Name": "Математический анализ",
+      "Teacher": "Уртаева А. А.",
+      "Classroom": "317",
+      "LessonType": 1,
+      "WeekType": 2
+    },
+    {
+      "Order": 1,
+      "Name": "Математический анализ",
+      "Teacher": "Кулаев Р. Ч.",
+      "Classroom": "301",
+      "LessonType": 0,
+      "WeekType": 2
+    },
+    {
+      "Order": 2,
+      "Name": "Дискретная математика",
+      "Teacher": "Воронцова И. А.",
+      "Classroom": "301",
+      "LessonType": 0,
+      "WeekType": 2
+    },
+    {
+      "Order": 3,
+      "Name": "Физра",
+      "Teacher": "...",
+      "Classroom": "ФизВоз 201",
+      "LessonType": 1,
+      "WeekType": 2
+    }
+  ],
+  "THURSDAY": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "FRIDAY": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "SATURDAY": [
+    null,
+    null,
+    null,
+    null
+  ]
+}

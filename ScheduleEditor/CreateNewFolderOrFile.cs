@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace ScheduleEditor
@@ -40,7 +41,7 @@ namespace ScheduleEditor
                 string newFilePath = newPath + ".json";
 
                 File.Create(newFilePath).Close();
-                File.WriteAllText(newFilePath, "{}");
+                File.WriteAllText(newFilePath, "{}", Encoding.UTF8);
             }
 
             DialogResult = DialogResult.OK;

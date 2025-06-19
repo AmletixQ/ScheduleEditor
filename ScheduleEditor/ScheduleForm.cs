@@ -199,6 +199,7 @@ namespace ScheduleEditor
                     Directory.Delete(folderPath, true);
                     MessageBox.Show("Папка успешно удалена!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                else return;
             }
             else
             {
@@ -209,6 +210,7 @@ namespace ScheduleEditor
                     File.Delete(folderPath);
                     MessageBox.Show("Файл успешно удален!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                else return;
             }
 
             UpdateNavigation();
@@ -231,6 +233,7 @@ namespace ScheduleEditor
                 EditLessonForm editLessonForm = new EditLessonForm(rowIndex);
                 editLessonForm.ShowDialog();
 
+                if (editLessonForm.DialogResult == DialogResult.Cancel) return;
                 lesson = editLessonForm.GetLesson();
 
                 ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value = lesson.ToString();
@@ -246,8 +249,6 @@ namespace ScheduleEditor
                 lesson = editLessonForm.GetLesson();
                 ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value = lesson.ToString();
             }
-
-            MessageBox.Show(columnIndex.ToString());
 
             weeklySchedule.AddLesson((TDay)(columnIndex - 1), lesson);
             weeklySchedule.WriteToJson(BuildPath());
