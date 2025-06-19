@@ -63,7 +63,7 @@ namespace ScheduleEditor
 
                         if (BreadCrumbs[BreadCrumbs.Count - 1].Contains(".json"))
                         {
-                            weeklySchedule.Schedule.Clear();
+                            weeklySchedule.Clear();
                             BreadCrumbs.RemoveAt(BreadCrumbs.Count - 1);
                         }
 
@@ -226,8 +226,6 @@ namespace ScheduleEditor
 
             Lesson lesson;
 
-            MessageBox.Show(rowIndex.ToString());
-
             if (string.IsNullOrEmpty(lessonData))
             {
                 EditLessonForm editLessonForm = new EditLessonForm(rowIndex);
@@ -248,6 +246,8 @@ namespace ScheduleEditor
                 lesson = editLessonForm.GetLesson();
                 ScheduleDataGrid.Rows[rowIndex].Cells[columnIndex].Value = lesson.ToString();
             }
+
+            MessageBox.Show(columnIndex.ToString());
 
             weeklySchedule.AddLesson((TDay)(columnIndex - 1), lesson);
             weeklySchedule.WriteToJson(BuildPath());
